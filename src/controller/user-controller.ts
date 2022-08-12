@@ -1,6 +1,6 @@
 import {Context} from "koa";
 
-const service = require("../service/userService")
+const service = require("../service/user-service")
 
 class UserController {
   async create(ctx: Context, next: () => Promise<any>) {

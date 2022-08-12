@@ -13,6 +13,8 @@ services:
       MYSQL_ROOT_PASSWORD: test1234
     volumes:
       - mysql-data:/var/lib/mysql
+    ports:
+      - 3306:3306
   adminer:
     image: adminer
     restart: always

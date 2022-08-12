@@ -2,7 +2,7 @@ import {RouterContext} from "koa-router";
 import { Context } from 'koa';
 
 const Router = require("koa-router");
-const { create } = require("../controller/userController")
+const { create } = require("../controller/user-controller")
 
 const userRouter = new Router({prefix: '/users'});
 

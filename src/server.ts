@@ -1,4 +1,5 @@
 const app = require('./app');
+require("./app/database")
 const config = require('./app/config');
 
 
@@ -10,3 +11,5 @@ app
   .on("error", (err: Error) => {
     console.error(err)
   })
+
+module.exports = { app }
