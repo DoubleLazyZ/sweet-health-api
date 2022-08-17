@@ -1,16 +1,18 @@
 import {Context} from "koa";
+import service from "../service/user.service"
+import Query from "mysql2/typings/mysql/lib/protocol/sequences/Query";
 
-const service = require("../service/user-service")
-
+// 關於user的操作
 class UserController {
   async create(ctx: Context, next: () => Promise<any>) {
     // 得到使用者傳的資料
     const user = ctx.request.body
     // 查資料
-    const result:string = await service.create(user)
-    console.log(result)
+    const result:Query = await service.create(user)
+
     // 返回資料
     ctx.body = result
   }
 }
-module.exports = new UserController();
+
+export default new UserController();

@@ -1,10 +1,10 @@
-import {PoolConnection} from "mysql2";
+import {Pool, PoolConnection} from "mysql2";
 
 const mysql = require("mysql2");
 
 const config = require('./config');
 
-const connection = mysql.createPool({
+const connection:Pool = mysql.createPool({
   host: config.MYSQL_HOST,
   port: config.MYSQL_PORT,
   database: config.MYSQL_DATABASE,
@@ -13,14 +13,18 @@ const connection = mysql.createPool({
 })
 
 
+// connection.getConnection((err: NodeJS.ErrnoException, conn: PoolConnection) => {
+//   conn.connect((err) => {
+//     if(conn) {
+//       console.log("連結失敗")
+//     } else {
+//       console.log("連結成功")
+//     }
+//   })
+// })
+
 connection.getConnection((err: NodeJS.ErrnoException, conn: PoolConnection) => {
-  conn.connect((err) => {
-    if(err) {
-      console.log("連結失敗")
-    } else {
-      console.log("連結成功")
-    }
-  })
+
 })
 
 module.exports = connection.promise();

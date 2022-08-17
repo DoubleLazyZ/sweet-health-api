@@ -1,8 +1,9 @@
 import {RouterContext} from "koa-router";
-import { Context } from 'koa';
+import {Context} from 'koa';
 
-const Router = require("koa-router");
-const { create } = require("../controller/user-controller")
+import Router from "koa-router";
+import userController from "../controller/user.controller";
+import { verifyUser } from "../middleware/user.middleware";
 
 const userRouter = new Router({prefix: '/users'});
 
@@ -11,6 +12,7 @@ userRouter.get('/', async (ctx: Context & RouterContext, next: () => Promise<any
   next()
 })
 
-userRouter.post('/', create)
+
+userRouter.post('/', verifyUser, userController.create)
 
 export default userRouter
