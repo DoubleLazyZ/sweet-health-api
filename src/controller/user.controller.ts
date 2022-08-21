@@ -8,7 +8,7 @@ class UserController {
     // 得到使用者傳的資料
     const user = ctx.request.body
     // 查資料
-    const result:Query = await service.create(user)
+    const result = await service.create(user)
 
     // 返回資料
     ctx.body = result
