@@ -1,5 +1,10 @@
 import {RouterContext} from "koa-router";
-import {NAME_OR_PASSWORD_IS_REQUIRED , USER_ALREADY_EXISTS, HASH_SECRET_IS_FAILED} from "../constants/error-type";
+import {
+  NAME_OR_PASSWORD_IS_REQUIRED ,
+  USER_ALREADY_EXISTS,
+  HASH_SECRET_IS_FAILED,
+  UNAUTHORIZATION
+} from "../constants/error-type";
 
 export const errorHandler = (error: Error, ctx: RouterContext) => {
   let status: number;
@@ -17,6 +22,10 @@ export const errorHandler = (error: Error, ctx: RouterContext) => {
     case USER_ALREADY_EXISTS:
       status = 409; // conflict
       message = "使用者名稱已被使用"
+      break;
+    case UNAUTHORIZATION:
+      status = 401;
+      message = "無效的token"
       break;
     default:
       status = 404;

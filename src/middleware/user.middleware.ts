@@ -7,8 +7,10 @@ import {
   HASH_SECRET_IS_FAILED
 } from "../constants/error-type";
 import service from "../service/user.service"
-import bcryptPassword from "../utils/password-handle";
+import { hashPassword } from "../utils/password-handle";
 
+
+//  判斷使用者填寫資料是否正確 & 該筆資料有無註冊過
 const verifyUser = async (ctx: Context & RouterContext, next: () => Promise<any>) => {
   // 1.獲得帳號和密碼
   const { name, password } = ctx.request.body
@@ -31,9 +33,10 @@ const verifyUser = async (ctx: Context & RouterContext, next: () => Promise<any>
 }
 
 
+// 對密碼加密
 const handlePassword = async(ctx: Context & RouterContext, next: () => Promise<any>) => {
   const { password }= ctx.request.body;
-  const bcryptedPassword = await bcryptPassword(password)
+  const bcryptedPassword = await hashPassword(password)
   if(bcryptedPassword instanceof Error) {
     const error = new Error(HASH_SECRET_IS_FAILED)
     ctx.app.emit("error", error, ctx)
